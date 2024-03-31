@@ -65,11 +65,6 @@ To use an interactive CLI prompt to test the agent run:
 
 
 
-### Use the CLI test tool
-A simple tool that provides an interactive prompt on the CLI to test the agent is provided, to run:
-
-```python agent-test.py```
-
 
 ### Example queries
 * what is the price of etherum
