@@ -29,7 +29,7 @@ class EtherscanAPI:
         balance_ether: float = balance_wei / 10**18
         return balance_ether
 
-    def check_contract_execution_status(self, transaction_hash: str) -> bool:
+    def get_contract_execution_status(self, transaction_hash: str) -> bool:
         """Checks if a contract execution resulted in an error."""
         module: str = 'transaction'
         action: str = 'getstatus'
@@ -37,7 +37,7 @@ class EtherscanAPI:
         status: str = response_data['result']['isError']
         return status == '0'
 
-    def check_transaction_receipt_status(self, transaction_hash: str) -> bool:
+    def get_transaction_receipt_status(self, transaction_hash: str) -> bool:
         """Checks the receipt status of a transaction to see if it was successful."""
         module: str = 'transaction'
         action: str = 'gettxreceiptstatus'

@@ -1,5 +1,5 @@
-from config import Config
-from api import SantimentAPI
+from .config import Config
+from .api import SantimentAPI
 
 class SantimentFunctions:
     def __init__(self):

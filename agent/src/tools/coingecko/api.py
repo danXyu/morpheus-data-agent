@@ -3,7 +3,7 @@ import logging
 from langchain.pydantic_v1 import BaseModel, Field
 from langchain.agents import Tool
 from typing import Optional
-from config import Config
+from .config import Config
 
 class CoinGeckoAPI:
     def __init__(self):

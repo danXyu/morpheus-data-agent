@@ -1,7 +1,7 @@
 from .api import SantimentAPI
 from .functions import SantimentFunctions
-from tools.base import Tool
-from tools.schemas import GetCoinsWithHighestPriceIncrease, GetDevActivity
+from langchain.agents import Tool
+from .schema import GetCoinsWithHighestPriceIncrease, GetHighestDevActivity
 
 santiment_functions = SantimentFunctions()
 
@@ -17,7 +17,7 @@ SANTIMENT_TOOLS = [
         name="get_highest_dev_activity",
         func=santiment_functions.get_highest_dev_activity,
         description="Get the coins with the highest developer activity",
-        args_schema=GetDevActivity,
+        args_schema=GetHighestDevActivity,
         return_direct=True
     )
 ]

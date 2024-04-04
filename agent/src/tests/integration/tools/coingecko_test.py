@@ -6,24 +6,24 @@ def coingecko_api():
     return CoinGeckoAPI()
 
 def test_get_coingecko_id_coin(coingecko_api):
-    coin_id = coingecko_api._get_coingecko_id("bitcoin", "coin")
+    coin_id = coingecko_api.get_coingecko_id("bitcoin", "coin")
     assert coin_id is not None
     assert isinstance(coin_id, str)
 
 def test_get_coingecko_id_nft(coingecko_api):
-    nft_id = coingecko_api._get_coingecko_id("cryptopunks", "nft")
+    nft_id = coingecko_api.get_coingecko_id("cryptopunks", "nft")
     assert nft_id is not None
     assert isinstance(nft_id, str)
 
 def test_get_price(coingecko_api):
     price = coingecko_api.get_price("bitcoin")
     assert price is not None
-    assert isinstance(price, int)
+    assert isinstance(price, (int, float))
 
 def test_get_floor_price(coingecko_api):
     floor_price = coingecko_api.get_floor_price("cryptopunks")
     assert floor_price is not None
-    assert isinstance(floor_price, int)
+    assert isinstance(floor_price, (int, float))
 
 def test_get_fdv(coingecko_api):
     fdv = coingecko_api.get_fdv("bitcoin")

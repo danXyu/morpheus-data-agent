@@ -8,6 +8,10 @@ class GetMarketCap(BaseModel):
     """Input schema for the get_coin_market_cap_tool."""
     coin: str = Field(description="Name of the coin")
 
+class GetFDV(BaseModel):
+    """Input schema for the get_fully_diluted_valuation_tool."""
+    coin: str = Field(description="Name of the coin")
+
 class GetFloorPrice(BaseModel):
     """Input schema for the get_nft_floor_price_tool."""
     nft: str = Field(description="Name of the NFT")

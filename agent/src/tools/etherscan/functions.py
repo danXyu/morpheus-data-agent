@@ -1,5 +1,5 @@
-from config import Config
-from api import EtherscanAPI
+from .config import Config
+from .api import EtherscanAPI
 
 class EtherscanFunctions:
     def __init__(self):
@@ -16,20 +16,20 @@ class EtherscanFunctions:
         except requests.exceptions.RequestException:
             return Config.API_ERROR_MESSAGE
 
-    def check_contract_execution_status(self, tx_hash):
-        """Checks the execution status of a contract."""
+    def get_contract_execution_status(self, tx_hash):
+        """Gets the execution status of a contract."""
         try:
-            status = self.etherscan_api.check_contract_execution_status(tx_hash)
+            status = self.etherscan_api.get_contract_execution_status(tx_hash)
             if status is None:
                 return Config.CONTRACT_STATUS_FAILURE_MESSAGE
             return Config.CONTRACT_STATUS_SUCCESS_MESSAGE.format(tx_hash=tx_hash, status=status)
         except requests.exceptions.RequestException:
             return Config.API_ERROR_MESSAGE
 
-    def check_transaction_receipt_status(self, tx_hash):
-        """Checks the status of a transaction receipt."""
+    def get_transaction_receipt_status(self, tx_hash):
+        """Gets the status of a transaction receipt."""
         try:
-            status = self.etherscan_api.check_transaction_receipt_status(tx_hash)
+            status = self.etherscan_api.get_transaction_receipt_status(tx_hash)
             if status is None:
                 return Config.RECEIPT_STATUS_FAILURE_MESSAGE
             return Config.RECEIPT_STATUS_SUCCESS_MESSAGE.format(tx_hash=tx_hash, status=status)

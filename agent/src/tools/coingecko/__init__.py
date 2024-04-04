@@ -1,7 +1,7 @@
+from langchain.agents import Tool
 from .api import CoinGeckoAPI
 from .functions import CoinGeckoFunctions
-from tools.base import Tool
-from tools.schemas import GetMarketCap, GetFDV, GetPrice
+from .schema import GetMarketCap, GetFDV, GetPrice, GetSparkChart
 
 coin_gecko_functions = CoinGeckoFunctions()
 
@@ -26,7 +26,7 @@ COINGECKO_TOOLS = [
         description="Get the price of a cryptocurrency",
         args_schema=GetPrice,
         return_direct=True
-    )
+    ),
     Tool(
         name="get_spark_chart",
         func=coin_gecko_functions.get_spark_chart,

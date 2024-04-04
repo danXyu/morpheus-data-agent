@@ -12,15 +12,15 @@ def test_get_ether_balance(etherscan_api):
     assert balance is not None, "Balance should not be None"
     assert isinstance(balance, float), "Balance should be a float"
 
-def test_check_contract_execution_status(etherscan_api):
+def test_get_contract_execution_status(etherscan_api):
     transaction_hash = "0x00"  # Example transaction hash
-    status = etherscan_api.check_contract_execution_status(transaction_hash)
+    status = etherscan_api.get_contract_execution_status(transaction_hash)
     assert status is not None, "Status should not be None"
     assert isinstance(status, bool), "Status should be a boolean"
 
-def test_check_transaction_receipt_status(etherscan_api):
+def test_get_transaction_receipt_status(etherscan_api):
     transaction_hash = "0x00"  # Example transaction hash
-    status = etherscan_api.check_transaction_receipt_status(transaction_hash)
+    status = etherscan_api.get_transaction_receipt_status(transaction_hash)
     assert status is not None, "Status should not be None"
     assert isinstance(status, bool), "Status should be a boolean"
 

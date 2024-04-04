@@ -1,7 +1,7 @@
+from langchain.agents import Tool
 from .api import EtherscanAPI
 from .functions import EtherscanFunctions
-from tools.base import Tool
-from tools.schemas import GetEtherBalance, CheckContractExecutionStatus, CheckTransactionReceiptStatus, GetERC20TokenSupply, GetConfirmationTimeEstimate
+from .schema import GetEtherBalance, GetContractExecutionStatus, GetTransactionReceiptStatus, GetERC20TokenSupply, GetConfirmationTimeEstimate
 
 etherscan_functions = EtherscanFunctions()
 
@@ -14,17 +14,17 @@ ETHERSCAN_TOOLS = [
         return_direct=True
     ),
     Tool(
-        name="check_contract_execution_status",
-        func=etherscan_functions.check_contract_execution_status,
-        description="Check the execution status of a contract",
-        args_schema=CheckContractExecutionStatus,
+        name="get_contract_execution_status",
+        func=etherscan_functions.get_contract_execution_status,
+        description="Get the execution status of a contract",
+        args_schema=GetContractExecutionStatus,
         return_direct=True
     ),
     Tool(
-        name="check_transaction_receipt_status",
-        func=etherscan_functions.check_transaction_receipt_status,
-        description="Check the status of a transaction receipt",
-        args_schema=CheckTransactionReceiptStatus,
+        name="get_transaction_receipt_status",
+        func=etherscan_functions.get_transaction_receipt_status,
+        description="Get the status of a transaction receipt",
+        args_schema=GetTransactionReceiptStatus,
         return_direct=True
     ),
     Tool(

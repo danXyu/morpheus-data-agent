@@ -1,5 +1,5 @@
-from config import Config
-from api import CoinGeckoAPI
+from .config import Config
+from .api import CoinGeckoAPI
 
 class CoinGeckoFunctions:
     def __init__(self):
