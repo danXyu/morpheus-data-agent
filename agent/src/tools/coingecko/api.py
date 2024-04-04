@@ -3,11 +3,12 @@ import logging
 from langchain.pydantic_v1 import BaseModel, Field
 from langchain.agents import Tool
 from typing import Optional
-from src.config import Config
+from config import Config
 
 class CoinGeckoAPI:
     def __init__(self):
         self.base_url = Config.COINGECKO_BASE_URL
+        self.config = Config()
 
     def get_coingecko_id(self, text: str, type: str = "coin") -> Optional[str]:
         """Get the CoinGecko ID for a given coin or NFT."""

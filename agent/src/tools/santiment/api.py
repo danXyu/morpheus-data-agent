@@ -1,11 +1,12 @@
 import requests
 import json
 from typing import List, Dict, Union
+from .config import SANTIMENT_API_KEY, SANTIMENT_BASE_URL
 
 class SantimentAPI:
-    def __init__(self, api_key: str = "c52jivtzcaec2hwt_ywusfqvvl4jed63s"):
-        self.api_key = api_key
-        self.base_url = 'https://api.santiment.net/graphiql'
+    def __init__(self):
+        self.api_key = SANTIMENT_API_KEY
+        self.base_url = SANTIMENT_BASE_URL
 
     def _make_api_request(self, query: str, variables: Dict[str, Union[str, int, List[str]]] = None) -> Dict:
         headers = {'Content-Type': 'application/json', 'Authorization': f'Apikey {self.api_key}'}
@@ -54,7 +55,7 @@ class SantimentAPI:
         response_data = self._make_api_request(query)
         trending_words = response_data['data']['getTrendingWords']['topWords']
         return trending_words
-
+    
     def get_highest_dev_activity(self, limit: int = 10) -> List[Dict[str, Union[str, int]]]:
         # Get the coins with the highest developer activity for the last 7 days
         query = '''
@@ -188,4 +189,3 @@ class SantimentAPI:
         print(response_data)
         transaction_volume_data = response_data['data']['getMetric']['timeseriesData']
         return transaction_volume_data
-
