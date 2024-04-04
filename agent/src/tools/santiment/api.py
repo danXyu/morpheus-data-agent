@@ -2,12 +2,12 @@ import requests
 import json
 from typing import List, Dict, Union
 
-class SantimentApi:
+class SantimentAPI:
     def __init__(self, api_key: str = "c52jivtzcaec2hwt_ywusfqvvl4jed63s"):
         self.api_key = api_key
         self.base_url = 'https://api.santiment.net/graphiql'
 
-    def make_api_request(self, query: str, variables: Dict[str, Union[str, int, List[str]]] = None) -> Dict:
+    def _make_api_request(self, query: str, variables: Dict[str, Union[str, int, List[str]]] = None) -> Dict:
         headers = {'Content-Type': 'application/json', 'Authorization': f'Apikey {self.api_key}'}
         payload = {'query': query, 'variables': variables}
         response = requests.post(self.base_url, headers=headers, json=payload)
@@ -37,7 +37,7 @@ class SantimentApi:
             'interval': '1d',
             'aggregation': 'LAST'
         }
-        response_data = self.make_api_request(query, variables)
+        response_data = self._make_api_request(query, variables)
         price_increase_data = response_data['data']['getMetric']['timeseriesData']
         return price_increase_data
 
@@ -51,7 +51,7 @@ class SantimentApi:
                 }
             }
         '''
-        response_data = self.make_api_request(query)
+        response_data = self._make_api_request(query)
         trending_words = response_data['data']['getTrendingWords']['topWords']
         return trending_words
 
@@ -93,7 +93,7 @@ class SantimentApi:
             })
         }
 
-        response_data = self.make_api_request(query, variables)
+        response_data = self._make_api_request(query, variables)
         print(response_data)
         projects = response_data['data']['allProjectsByFunction']['projects']
         dev_activity_data = []
@@ -130,7 +130,7 @@ class SantimentApi:
             'interval': '1d',
             'aggregation': 'MAX'
         }
-        response_data = self.make_api_request(query, variables)
+        response_data = self._make_api_request(query, variables)
         network_growth_data = response_data['data']['getMetric']['timeseriesData']
         return network_growth_data
 
@@ -157,7 +157,7 @@ class SantimentApi:
             'interval': '1d',
             'aggregation': 'MAX'
         }
-        response_data = self.make_api_request(query, variables)
+        response_data = self._make_api_request(query, variables)
         token_circulation_data = response_data['data']['getMetric']['timeseriesData']
         return token_circulation_data
 
@@ -184,7 +184,7 @@ class SantimentApi:
             'interval': '1d',
             'aggregation': 'MAX'
         }
-        response_data = self.make_api_request(query, variables)
+        response_data = self._make_api_request(query, variables)
         print(response_data)
         transaction_volume_data = response_data['data']['getMetric']['timeseriesData']
         return transaction_volume_data

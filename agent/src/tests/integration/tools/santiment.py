@@ -3,7 +3,7 @@ from src.tools.santiment.api import SantimentApi
 
 @pytest.fixture
 def santiment_api():
-    return SantimentApi()
+    return SantimentAPI()
 
 def test_make_api_request(santiment_api):
     query = '''
