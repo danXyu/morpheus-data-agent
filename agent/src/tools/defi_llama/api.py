@@ -2,7 +2,7 @@ import requests
 import logging
 from langchain.pydantic_v1 import BaseModel, Field
 from langchain.agents import Tool
-from src.config import Config
+from config import Config
 from src.tools.coingecko import CoinGeckoAPI
 
 class DefiLlamaAPI:

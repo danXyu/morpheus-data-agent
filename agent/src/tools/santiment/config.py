@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO)
 # Configuration object
 class Config:
     SANTIMENT_API_KEY = os.getenv("SANTIMENT_API_KEY")
-    SANTIMENT_BASE_URL = "https://api.santiment.net/v1"
+    SANTIMENT_BASE_URL = "https://api.santiment.net/graphiql"
 
     # User-facing strings for SantimentAPI functions
     TOKEN_CIRCULATION_SUCCESS_MESSAGE = "The token circulation of {slug} is {value}."

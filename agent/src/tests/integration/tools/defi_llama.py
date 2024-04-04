@@ -14,7 +14,7 @@ def test_get_protocols_list(defillama_api):
     assert all(isinstance(item, str) for item in protocols_list)
     assert all(isinstance(item, str) for item in gecko_ids)
 
-# TODO: This test is broken. This function in the API might be misconfigured.
+# TODO: This test is broken. The API might be misconfigured.
 def test_get_protocol_tvl(defillama_api):
     protocol_tvl = defillama_api.get_protocol_tvl("bitcoin")
     assert protocol_tvl is not None

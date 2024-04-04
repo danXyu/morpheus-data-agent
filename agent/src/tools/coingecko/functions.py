@@ -35,3 +35,13 @@ class CoinGeckoFunctions:
             return self.config.PRICE_SUCCESS_MESSAGE.format(coin_name=coin_name, price=price)
         except requests.exceptions.RequestException:
             return self.config.API_ERROR_MESSAGE
+
+    def get_spark_chart(self, coin_name):
+        """Get the spark chart of a cryptocurrency."""
+        try:
+            spark_chart = self.coin_gecko_api.get_spark_chart(coin_name)
+            if spark_chart is None:
+                return self.config.SPARK_CHART_FAILURE_MESSAGE
+            return self.config.SPARK_CHART_SUCCESS_MESSAGE.format(coin_name=coin_name, spark_chart=spark_chart)
+        except requests.exceptions.RequestException:
+            return self.config.API_ERROR_MESSAGE

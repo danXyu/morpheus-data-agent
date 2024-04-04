@@ -27,4 +27,11 @@ COINGECKO_TOOLS = [
         args_schema=GetPrice,
         return_direct=True
     )
+    Tool(
+        name="get_spark_chart",
+        func=coin_gecko_functions.get_spark_chart,
+        description="Get the spark chart of a cryptocurrency",
+        args_schema=GetSparkChart,
+        return_direct=True
+    )
 ]

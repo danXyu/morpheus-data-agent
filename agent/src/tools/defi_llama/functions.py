@@ -11,7 +11,7 @@ class DefiLlamaFunctions:
         try:
             tvl = get_protocol_tvl(protocol_name)
             if tvl is None:
-                return Config.TVL_FAILURE_MESSAGE
-            return Config.TVL_SUCCESS_MESSAGE.format(protocol_name=protocol_name, tvl=tvl)
+                return self.config.TVL_FAILURE_MESSAGE
+            return self.config.TVL_SUCCESS_MESSAGE.format(protocol_name=protocol_name, tvl=tvl)
         except requests.exceptions.RequestException:
-            return Config.API_ERROR_MESSAGE
+            return self.config.API_ERROR_MESSAGE

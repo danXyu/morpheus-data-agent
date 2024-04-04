@@ -5,6 +5,7 @@ logging.basicConfig(level=logging.INFO)
 
 # Configuration object
 class Config:
+    DEFILLAMA_BASE_URL = "https://api.llama.fi"
 
     # User-facing strings
     TVL_SUCCESS_MESSAGE = "The TVL of {protocol_name} is ${tvl:,}"

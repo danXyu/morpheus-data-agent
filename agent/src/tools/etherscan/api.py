@@ -1,14 +1,14 @@
 import requests
 from typing import Dict, Any
-from .config import ETHERSCAN_API_KEY, ETHERSCAN_BASE_URL
+from .config import Config
 
 class EtherscanAPI:
     """A class to interact with the Etherscan API, providing various blockchain data retrieval methods."""
     
-    def __init__(self, api_key: str = "D2SRA6YBNN7CZH8NES89KNMWNCXMVK8U51") -> None:
-        """Initializes the EtherscanAPI with a given API key."""
-        self.api_key: str = ETHERSCAN_API_KEY
-        self.base_url: str = ETHERSCAN_BASE_URL
+    def __init__(self) -> None:
+        """Initializes the EtherscanAPI"""
+        self.api_key: str = Config.ETHERSCAN_API_KEY
+        self.base_url: str = Config.ETHERSCAN_BASE_URL
 
     def _make_api_request(self, module: str, action: str, **kwargs: Any) -> Dict[str, Any]:
         """Constructs and sends a request to the Etherscan API and returns the JSON response."""
