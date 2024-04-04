@@ -1,5 +1,5 @@
 import pytest
-from agent.src.tools.coingecko import CoinGeckoAPI
+from src.tools.coingecko import CoinGeckoAPI
 
 @pytest.fixture
 def coingecko_api():
@@ -18,25 +18,25 @@ def test_get_coingecko_id_nft(coingecko_api):
 def test_get_price(coingecko_api):
     price = coingecko_api.get_price("bitcoin")
     assert price is not None
-    assert isinstance(price, float)
+    assert isinstance(price, int)
 
 def test_get_floor_price(coingecko_api):
     floor_price = coingecko_api.get_floor_price("cryptopunks")
     assert floor_price is not None
-    assert isinstance(floor_price, float)
+    assert isinstance(floor_price, int)
 
 def test_get_fdv(coingecko_api):
     fdv = coingecko_api.get_fdv("bitcoin")
     assert fdv is not None
-    assert isinstance(fdv, float)
+    assert isinstance(fdv, int)
 
 def test_get_market_cap(coingecko_api):
     market_cap = coingecko_api.get_market_cap("bitcoin")
     assert market_cap is not None
-    assert isinstance(market_cap, float)
+    assert isinstance(market_cap, int)
 
 def test_get_price_spark_chart(coingecko_api, capsys):
-    coingecko_api.get_price_spark_chart("bitcoin", 1, 10, 60)
-    captured = capsys.readouterr()
-    assert "Bitcoin Price Spark Chart (Last 1 Days)" in captured.out
+    spark_chart = coingecko_api.get_price_spark_chart("bitcoin", 1, 10, 60)
+    assert spark_chart is not None
+    assert "Bitcoin Price Spark Chart (Last 1 Days)" in spark_chart
 

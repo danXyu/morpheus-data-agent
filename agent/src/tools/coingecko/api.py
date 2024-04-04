@@ -2,14 +2,14 @@ import requests
 import logging
 from langchain.pydantic_v1 import BaseModel, Field
 from langchain.agents import Tool
-from config import Config
 from typing import Optional
+from src.config import Config
 
 class CoinGeckoAPI:
     def __init__(self):
         self.base_url = Config.COINGECKO_BASE_URL
 
-    def _get_coingecko_id(self, text: str, type: str = "coin") -> Optional[str]:
+    def get_coingecko_id(self, text: str, type: str = "coin") -> Optional[str]:
         """Get the CoinGecko ID for a given coin or NFT."""
         url = f"{self.base_url}/search"
         params = {"query": text}
@@ -29,7 +29,7 @@ class CoinGeckoAPI:
 
     def get_price(self, coin: str) -> Optional[float]:
         """Get the price of a coin from CoinGecko API."""
-        coin_id = self._get_coingecko_id(coin, type="coin")
+        coin_id = self.get_coingecko_id(coin, type="coin")
         if not coin_id:
             return None
         url = f"{self.base_url}/simple/price"
@@ -44,7 +44,7 @@ class CoinGeckoAPI:
 
     def get_floor_price(self, nft: str) -> Optional[float]:
         """Get the floor price of an NFT from CoinGecko API."""
-        nft_id = self._get_coingecko_id(str(nft), type="nft")
+        nft_id = self.get_coingecko_id(str(nft), type="nft")
         if not nft_id:
             return None
         url = f"{self.base_url}/nfts/{nft_id}"
@@ -58,7 +58,7 @@ class CoinGeckoAPI:
 
     def get_fdv(self, coin: str) -> Optional[float]:
         """Get the fully diluted valuation of a coin from CoinGecko API."""
-        coin_id = self._get_coingecko_id(coin, type="coin")
+        coin_id = self.get_coingecko_id(coin, type="coin")
         if not coin_id:
             return None
         url = f"{self.base_url}/coins/{coin_id}"
@@ -73,7 +73,7 @@ class CoinGeckoAPI:
 
     def get_market_cap(self, coin: str) -> Optional[float]:
         """Get the market cap of a coin from CoinGecko API."""
-        coin_id = self._get_coingecko_id(coin, type="coin")
+        coin_id = self.get_coingecko_id(coin, type="coin")
         if not coin_id:
             return None
         url = f"{self.base_url}/coins/markets"
@@ -88,7 +88,7 @@ class CoinGeckoAPI:
 
     def get_price_spark_chart(self, coin: str, days: int = 60, height: int = 10, width: int = 60) -> None:
         """Get the price spark chart of a coin from CoinGecko API."""
-        coin_id = self._get_coingecko_id(coin, type="coin")
+        coin_id = self.get_coingecko_id(coin, type="coin")
         if not coin_id:
             return None
         url = f"{self.base_url}/coins/{coin_id}/market_chart?vs_currency=usd&days={days}"
@@ -104,7 +104,7 @@ class CoinGeckoAPI:
                 normalized_prices = [int((price - min_price) / (max_price - min_price) * height) for price in prices]
                 step = len(prices) // width
                 reduced_prices = normalized_prices[::step]
-                chart = ""
+                chart = f"{coin_id.capitalize()} Price Spark Chart (Last {days} Days)\n\n"
                 for i in range(height, -1, -1):
                     row = ""
                     for price in reduced_prices:
@@ -113,10 +113,10 @@ class CoinGeckoAPI:
                         else:
                             row += " "
                     chart += row + "\n"
-                print(f"{coin_id.capitalize()} Price Spark Chart (Last {days} Days)")
-                print(chart)
+                return chart
             else:
                 print("Failed to fetch price data from the CoinGecko API.")
         except requests.exceptions.RequestException as e:
             logging.error(f"Failed to retrieve price spark chart: {str(e)}")
             raise
+

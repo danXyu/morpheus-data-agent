@@ -1,15 +1,14 @@
 import requests
 import logging
-from difflib import SequenceMatcher
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
 from langchain.pydantic_v1 import BaseModel, Field
 from langchain.agents import Tool
-from config import Config
+from src.config import Config
+from src.tools.coingecko import CoinGeckoAPI
 
 class DefiLlamaAPI:
     def __init__(self):
         self.base_url = Config.DEFILLAMA_BASE_URL
+        self.coin_gecko_api = CoinGeckoAPI()
 
     def get_protocols_list(self):
         """Get the list of protocols from DefiLlama API."""
@@ -26,7 +25,7 @@ class DefiLlamaAPI:
     def get_protocol_tvl(self, protocol_name):
         """Get the TVL (Total Value Locked) of a protocol from DefiLlama API."""
         id,gecko = self.get_protocols_list()
-        tag = get_coingecko_id(protocol_name)
+        tag = self.coin_gecko_api.get_coingecko_id(protocol_name)
         if not tag:
             return None
         protocol_id = next((i for i, j in zip(id, gecko) if j == tag), None)
