@@ -10,6 +10,7 @@ class Config:
     MODEL_REVISION = "openhermes-2.5-mistral-7b.Q4_K_M.gguf"
     MODEL_PATH = "model/"+MODEL_REVISION
     DOWNLOAD_DIR = "model"
+
     # API endpoints
     COINGECKO_BASE_URL = "https://api.coingecko.com/api/v3"
     DEFILLAMA_BASE_URL = "https://api.llama.fi"

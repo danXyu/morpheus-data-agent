@@ -79,6 +79,12 @@ To use an interactive CLI prompt to test the agent run:
 * what is the total value locked in sushi
 * tvl of pendle
 
+## FAQs
+
+If you get "ERROR: Failed building wheel for llama-cpp-python", you may need to install gcc@11. 
+For Mac, run `brew install gcc@11`. 
+For Ubuntu, run `sudo apt install gcc-11 g++-11`.
+
 ## Notes
 This project uses the openhermes-2.5-mistral-7b GGUF model and performs well on a modern laptop using only CPU.
 

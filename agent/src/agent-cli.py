@@ -10,10 +10,6 @@ from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from config import Config
 
 
-def download_model(model_name, revision):
-    model_directory = hf_hub_download(repo_id=model_name, filename=revision)
-    return model_directory
-
 def load_llm():
     model_path = Config.MODEL_PATH
     n_gpu_layers = 0
@@ -34,7 +30,11 @@ def load_llm():
     return llm
 
 def load_agent(tools):
-    PREFIX = "<<SYS>> You are smart agent that selects a function from list of functions based on user queries.\\ When the function throws Error Tell the user why u stopped and about the error from the description\\ Run only one function tool at a time in one query.<</SYS>>\\n"
+    PREFIX = (
+        "<<SYS>> You are a smart agent that can select a function from a list of functions based on user queries.\\ "
+        "If the function encounters an error, provide the user with a detailed explanation of why you stopped and the error description.\\ "
+        "Please run only one function tool at a time in a single query.<</SYS>>\\n"
+    )
     llm = load_llm()
     agent = initialize_agent(
         tools,
